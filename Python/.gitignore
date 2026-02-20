@@ -2,3 +2,10 @@ tests/
 uv.lock
 **/__pycache__/
 .venv/
+
+
+# Mac
+.DS_Store
+**/.DS_Store
+# Windows
+Thumbs.db
