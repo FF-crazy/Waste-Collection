@@ -4,8 +4,8 @@ from pathlib import Path
 
 import httpx
 
-BASEURL: str = ""  # 结尾一定不要有 /
-API_KEY: str = ""
+BASEURL: str = "https://api.aaaapi.com"  # 结尾一定不要有 /
+API_KEY: str = "sk-UZL7Ws6Ag70NGa5kBd2a5b3f76174e0eBd49E6Ab917b4cD6"
 MAX_RETRIES: int = 3
 
 INTERFACES: dict[str, dict] = {

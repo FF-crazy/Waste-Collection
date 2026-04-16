@@ -2,7 +2,6 @@
 
 import asyncio
 import base64
-from dataclasses import dataclass
 from pathlib import Path
 import logging
 import csv
@@ -11,8 +10,9 @@ import httpx
 from Crypto.Cipher import AES
 
 
-USER_ID: str = "YOUR_CLASS_ID_HERE"
-PASSWORD: str = "YOUR_PASSWORD_HERE"
+USER_ID: str = "2023307150705"
+PASSWORD: str = "lizhenghao520"
+""
 # 为空默认查所有, 格式类似为 "2025-2026-1", "2024-2025-3"
 SEMESTER: str = ""
 
@@ -95,12 +95,12 @@ class Processor:
     
     def output(self) -> None:
         with open(FILE, mode='w',) as f:
-            data: list[list[str | int]] = [
+            data: list[list[str | float]] = [
                 [
                     item["courseNature"],
                     item["kkxq"],
                     item["courseName"],
-                    int(item["credit"]),
+                    float(item["credit"]),
                     item["fraction"],
                 ]
                 for item in self.grade_list
