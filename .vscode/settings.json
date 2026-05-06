@@ -1,0 +1,13 @@
+{
+  "editor.experimental.preferTreeSitter.typescript": true,
+  "C_Cpp.inlayHints.autoDeclarationTypes.enabled": false,
+  "js/ts.preferences.preferTypeOnlyAutoImports": true,
+  "js/ts.format.semicolons": "insert",
+  "js/ts.implicitProjectConfig.target": "ESNext",
+  "js/ts.inlayHints.enumMemberValues.enabled": true,
+  "js/ts.inlayHints.functionLikeReturnTypes.enabled": true,
+  "js/ts.inlayHints.parameterNames.enabled": "all",
+  "js/ts.inlayHints.parameterTypes.enabled": true,
+  "js/ts.inlayHints.propertyDeclarationTypes.enabled": true,
+  "js/ts.inlayHints.variableTypes.enabled": true
+}

@@ -1,6 +1,7 @@
-use std::collections::HashMap;
-struct RangeFreqQuery {
-  counter: HashMap<i32, Vec<usize>>,
+use std::collections::VecDeque;
+struct Router {
+  deque: VecDeque<(i32, i32, i32)>,
+  mem: usize,
 }
 
 
@@ -8,36 +9,48 @@ struct RangeFreqQuery {
  * `&self` means the method takes an immutable reference.
  * If you need a mutable reference, change it to `&mut self` instead.
  */
-impl RangeFreqQuery {
+impl Router {
 
-    fn new(arr: Vec<i32>) -> Self {
-        let n = arr.len() / 10;
-        let mut counter = HashMap::new();
-        for (i, &item) in arr.iter().enumerate() {
-          counter.entry(item).or_insert_with(|| {Vec::with_capacity(n)}).push(i);
-        }
-        RangeFreqQuery { counter }
+    fn new(memoryLimit: i32) -> Self {
+        Router { deque: VecDeque::with_capacity(memoryLimit as usize), mem: memoryLimit as _ }
     }
     
-    fn query(&self, left: i32, right: i32, value: i32) -> i32 {
-        if let Some(count) = self.counter.get(&value) {
-          let lower = count.partition_point(|&x| {x < left as usize});
-          let upper = count.partition_point(|&x| {x < (right + 1) as usize});
-          (upper - lower) as _
-        } else {
-          0
+    fn add_packet(&mut self, source: i32, destination: i32, timestamp: i32) -> bool {
+      for &item in self.deque.iter().rev() {
+        if item.2 != timestamp {
+          break;
         }
-        
+        if item.0 == source && item.1 == destination {
+          return false;
+        }
+      }
+      if self.deque.len() == self.mem {
+        self.deque.pop_front();
+      }
+      self.deque.push_back((source, destination, timestamp));
+      return true;
     }
-}
-
-/**
- * Your RangeFreqQuery object will be instantiated and called as such:
- * let obj = RangeFreqQuery::new(arr);
- * let ret_1: i32 = obj.query(left, right, value);
- */
-
-#[test]
-fn test() {
-
+    
+    fn forward_packet(&mut self) -> Vec<i32> {
+        if let Some(item) = self.deque.pop_front() {
+          vec![item.0, item.1, item.2]
+        } else {
+          Vec::new()
+        }
+    }
+    
+    fn get_count(&self, destination: i32, start_time: i32, end_time: i32) -> i32 {
+        let left = self.deque.partition_point(|&x| {x.2 < start_time});
+        let right = self.deque.partition_point(|&x| {x.2 <= end_time}) as i32 - 1;
+        if right == -1 {
+          return 0;
+        }
+        let mut ans = 0;
+        for item in left..=right as usize {
+          if self.deque[item].1 == destination {
+            ans += 1;
+          }
+        }
+        ans
+    }
 }

@@ -1,8 +1,17 @@
+use std::{collections::HashMap, i32};
 
 pub struct Solution;
+const MOD: i32 = 109 + 7;
 
-
-fn main() {
-    let s = "10101".to_string();
-    println!("{}", Solution::count_k_constraint_substrings(s, 1));
+impl Solution {
+    pub fn shift_distance(
+        s: String,
+        t: String,
+        next_cost: Vec<i32>,
+        previous_cost: Vec<i32>,
+    ) -> i64 {
+      
+    }
 }
+
+fn main() {}
