@@ -12,6 +12,7 @@ dependencies = [
     "pillow>=12.1.1",
     "pycryptodome>=3.23.0",
     "pydantic>=2.12.5",
+    "requests>=2.33.1",
 ]
 
 [dependency-groups]
