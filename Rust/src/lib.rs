@@ -1,1 +1,1 @@
-mod temp;
+mod my_string;
